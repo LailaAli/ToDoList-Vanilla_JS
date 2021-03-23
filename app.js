@@ -30,20 +30,30 @@ const addTodo = ( event ) => {
   const deleteButton = document.createElement( 'button' );
   deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
   deleteButton.classList.add( "delete-btn" );
-  deleteButton.addEventListener( 'click', deleteTodo )
   todoDiv.appendChild( deleteButton );
 
   // Append to list
-  todoList.appendChild( todoDiv );
+  if ( newTodo.innerText === "" ) {
+    alert( 'You did not add a todo' )
+  } else {
+    todoList.appendChild( todoDiv );
+  }
 
   // Clear Todo input value
   todoInput.value = "";
 }
 
 
-const deleteTodo = ( event ) => {
+const deleteCheck = ( event ) => {
+  const item = event.target;
 
+  // Delete todo
+  if ( item.classList[ 0 ] === 'delete-btn' ) {
+    const todo = item.parentElement;
+    todo.remove();
+  }
 }
 
 // Event Listeners
-todoButton.addEventListener( 'click', addTodo )
+todoButton.addEventListener( 'click', addTodo );
+todoList.addEventListener( 'click', deleteCheck );
