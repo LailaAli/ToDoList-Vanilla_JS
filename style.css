@@ -64,6 +64,7 @@ ul {
   display: flex;
   width: 100%;
   margin: 5px 0;
+  transition: all .5s ease;
 }
 
 .todo-item {
@@ -71,6 +72,15 @@ ul {
   padding: 10px 20px;
   background-color: #fff;
   color: #000
+}
+
+.completed li {
+  text-decoration-line: line-through;
+  text-decoration-thickness: 3px;
+  text-decoration-color: black;
+  color: gray;
+  opacity: .6;
+  
 }
 
 .complete-btn, .delete-btn {
@@ -101,4 +111,9 @@ background-color: rgb(250, 100, 19);
 
 .fa-trash, .fa-check {
   pointer-events: none;
+}
+
+.fall {
+  transform: translateY(80px) rotateZ(20deg);
+  opacity: 0;
 }
