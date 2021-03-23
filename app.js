@@ -57,9 +57,11 @@ const deleteCheck = ( event ) => {
 
     // Animation
     todo.classList.add( 'fall' )
+    removeTodosFromLocal( todo );
     todo.addEventListener( 'transitionend', e => {
       todo.remove();
     } )
+
   }
 
   // Complete todo
@@ -111,7 +113,72 @@ const saveTodosToLocal = ( todo ) => {
   localStorage.setItem( 'todos', JSON.stringify( todos ) );
 }
 
+// Get todos
+const getTodos = () => {
+  let todos;
+
+  if ( localStorage.getItem( 'todos' ) === null ) {
+    todos = [];
+  } else {
+    todos = JSON.parse( localStorage.getItem( 'todos' ) );
+  }
+
+  todos.forEach( todo => {
+
+    const todoDiv = document.createElement( "div" );
+    todoDiv.classList.add( "todo" );
+
+    // Create li
+    const newTodo = document.createElement( 'li' );
+    newTodo.classList.add( 'todo-item' );
+    newTodo.innerText = todo;
+
+
+    todoDiv.appendChild( newTodo );
+
+    // Checkmark button
+    const completedButton = document.createElement( 'button' );
+    completedButton.innerHTML = '<i class="fas fa-check"></i>';
+    completedButton.classList.add( "complete-btn" );
+    todoDiv.appendChild( completedButton );
+
+    // Delete button
+    const deleteButton = document.createElement( 'button' );
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteButton.classList.add( "delete-btn" );
+    todoDiv.appendChild( deleteButton );
+
+    // Append to list
+    if ( newTodo.innerText === "" ) {
+      alert( 'You did not add a todo' )
+    } else {
+      todoList.appendChild( todoDiv );
+    }
+  } )
+}
+
+// Remove todos from local storage
+const removeTodosFromLocal = ( todo ) => {
+  let todos;
+
+  if ( localStorage.getItem( 'todos' ) === null ) {
+    todos = [];
+  } else {
+    todos = JSON.parse( localStorage.getItem( 'todos' ) );
+  }
+
+  // Get index of todo clicked then remove
+  const todoIndex = todo.children[ 0 ].innerText;
+  todos.splice( todos.indexOf( todoIndex ), 1 );
+  console.log( todos )
+
+  // Update local storage w/new array
+  localStorage.setItem( 'todos', JSON.stringify( todos ) );
+
+}
+
 // Event Listeners
 todoButton.addEventListener( 'click', addTodo );
 todoList.addEventListener( 'click', deleteCheck );
 filterOption.addEventListener( 'click', filterTodo )
+document.addEventListener( 'DOMContentLoaded', getTodos );
