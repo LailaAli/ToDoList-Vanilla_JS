@@ -21,6 +21,9 @@ const addTodo = ( event ) => {
 
   todoDiv.appendChild( newTodo );
 
+  // Add todo to local storage
+  saveTodosToLocal( todoInput.value );
+
   // Checkmark button
   const completedButton = document.createElement( 'button' );
   completedButton.innerHTML = '<i class="fas fa-check"></i>';
@@ -92,6 +95,20 @@ const filterTodo = ( e ) => {
         break;
     }
   } )
+}
+
+// Save todo to local storage
+const saveTodosToLocal = ( todo ) => {
+  // Check to see if there are items in local
+  let todos;
+  if ( localStorage.getItem( 'todos' ) === null ) {
+    todos = [];
+  } else {
+    todos = JSON.parse( localStorage.getItem( 'todos' ) );
+  }
+
+  todos.push( todo );
+  localStorage.setItem( 'todos', JSON.stringify( todos ) );
 }
 
 // Event Listeners
