@@ -5,7 +5,7 @@
 }
 
 body {
-  background: linear-gradient(120deg, #e8b926, #fda085);
+  background: #ffd3af;
   color: #fff;
   font-family: 'Lexend', sans-serif;
   margin-right: auto;
@@ -16,6 +16,7 @@ body {
   font-size: 50px;
   text-align: center;
   margin: 50px 0;
+  color: #0fad98;
 }
 
 form {
@@ -117,3 +118,48 @@ background-color: rgb(250, 100, 19);
   transform: translateY(80px) rotateZ(20deg);
   opacity: 0;
 }
+
+/* Filter */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background-image: none;
+}
+
+.select {
+  margin: 0 16px;
+  position: relative;
+  overflow: hidden;
+  height: 43px;
+}
+
+select {
+  width: 200px;
+  height: 100%;
+  padding: 10px;
+  color: #ce4800;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 14px 16px;
+  background-color: #ce4800;
+  pointer-events: none;
+  height: 100%;
+}
+
+/* .select:hover::after {
+  background: #fff;
+  color: #ce4800;
+  transition: all 0.3s ease;
+} */
